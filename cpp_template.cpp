@@ -12,8 +12,6 @@
 #include <iomanip>
 #include <chrono>
 
-#define LOCAL
-
 using namespace std;
 
 struct TreeNode {
@@ -98,20 +96,50 @@ vector<int> stringToIntegerVector(string input) {
     return output;
 }
 
+/*
+ * Pretty Print Function
+ */
 
-int maxSubArr(vector<int> arr) {
-    int ans = -9999999;
-    int now = 0;
-    for (int i = 0; i < arr.size(); ++i) {
-        now += arr[i];
-        if (now > ans) {
-            ans = now;
-        }
-        if (now < 0) {
-            now = 0;
+void prettyPrintTree(TreeNode* node, string prefix = "", bool isLeft = true) {
+    if (node == nullptr) {
+        cout << "Empty tree";
+        return;
+    }
+
+    if(node->right) {
+        prettyPrintTree(node->right, prefix + (isLeft ? "│   " : "    "), false);
+    }
+
+    cout << prefix + (isLeft ? "└── " : "┌── ") + to_string(node->val) + "\n";
+
+    if (node->left) {
+        prettyPrintTree(node->left, prefix + (isLeft ? "    " : "│   "), true);
+    }
+}
+
+void prettyPrintLinkedList(ListNode* node) {
+    while (node && node->next) {
+        cout << node->val << "->";
+        node = node->next;
+    }
+
+    if (node) {
+        cout << node->val << endl;
+    } else {
+        cout << "Empty LinkedList" << endl;
+    }
+}
+
+template<typename T>
+void prettyPrintVector(vector<T> vec) {
+    cout << '[';
+    for (int i = 0; i < vec.size(); ++i) {
+        cout << vec[i];
+        if (i != vec.size() - 1) {
+            cout << ",";
         }
     }
-    return ans;
+    cout << "]";
 }
 
 
