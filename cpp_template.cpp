@@ -12,6 +12,7 @@
 #include <iomanip>
 #include <chrono>
 #include <bitset>
+#include <list>
 
 #define LOCAL
 
@@ -169,7 +170,7 @@ void prettyPrintVector(vector<T> vec) {
 int randInt(int a, int b) {
     static random_device rd;  //Will be used to obtain a seed for the random number engine
     static mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
-    static uniform_int_distribution<> distrib(a, b);
+    uniform_int_distribution<> distrib(a, b);
     return distrib(gen);
 }
 
